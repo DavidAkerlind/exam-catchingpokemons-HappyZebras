@@ -1,3 +1,11 @@
+/* ==== Font import ====*/
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+
+/* ==== Variables ==== */
+:root {
+--text-nunito-sans: Nunito Sans, sans-serif; /* Nunito Sans */
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -9,5 +17,100 @@
 img {
     width: 300px;
     transition: all 3s linear;
+}
+
+body {
+    color: #ddd;
+    height: 100vh;
+
+    background-image: url(../assets/background.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+}
+.form-wrapper {
+    max-width: 400px;
+    width: 100%;
+
+    font-family: var(--text-nunito-sans);
+    text-align: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+    border-radius: 15px;
+
+    background-color: rgba(230, 248, 247, 0.05);
+
+    box-shadow: 0px 4px 24px 1px rgba(0, 0, 0, 0.288);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);   
+}
+.form {
+    padding: 3rem;
+    
+}
+
+.form__heading {
+    font-size: 24pt;
+    font-weight: 800;
+    margin-bottom: 2rem;
+}
+
+.form__sub-heading {
+    font-size: 14pt;
+    margin-bottom: 0.8rem;
+}
+
+.form__text {
+    margin-top: 1.5rem;
+}
+
+label {
+cursor: pointer;
+    margin: 0.8rem;
+    display: inline-block;
+}
+
+.form__input-field {
+   padding: 0.5rem;
+   padding-left: 0.8rem;
+   margin: 0.2rem;
+   margin-bottom: 0.8rem;
+   border: 2px solid #ddd;
+   border-radius: 100px;
+   font-size: 1rem;
+}
+
+.form__btn {
+    background: #54a429;
+    color: white;
+    border: none;
+    padding: 20px;
+    font-size: 1rem;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+    margin-top: 15px;
+}
+.form__btn:hover {
+    background-color: #457c28;
+}
+
+.form__error-msg{
+    color: red;
+    font-style: italic;
+}
+
+.d-none {
+    display: none;
 }
 
