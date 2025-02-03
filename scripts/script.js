@@ -23,7 +23,19 @@ function resetForm() {
 
 }
 
-function gameStart() {}
+function gameStart() {
+    console.log("gameStart()")
+    document.querySelector("#formWrapper").classList.add("d-none")
+    document.querySelector("#gameField").classList.remove("d-none")
+    document.querySelector("body").style.backgroundImage = "url('../assets/arena-background.png')";
+    //loadPokemons
+    //randomizePokemons
+    //placePokemons
+    //addTrainerToDatabase
+    //toggleMusic
+
+    //startGame -- (is this gameLoad?) showPokemons , startTimer & movePokemons
+}
 
 function validateForm() {
     console.log("validateForm()");
