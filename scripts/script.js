@@ -1,3 +1,30 @@
+pageLoad();
+
+function pageLoad() {
+    console.log("pageLoad()");
+
+    document.querySelector("#form").addEventListener("submit", (event) => {
+        event.preventDefault();
+       if (validateForm()) {
+        resetForm();
+        gameStart();
+        }
+    });
+}
+
+function resetForm() {
+    console.log("resetForm()");
+
+    document.querySelector("#errorMsg").textContent = "";
+    document.querySelector("#nick").value = "";
+    document.querySelector("#age").value = "";
+    document.querySelector("#boy").checked = false;
+    document.querySelector("#girl").checked = false;
+
+}
+
+function gameStart() {}
+
 function validateForm() {
     console.log("validateForm()");
     let trainerName = document.querySelector("#nick");
@@ -47,9 +74,3 @@ function validateForm() {
         return false;
     }
 }
-
-document.querySelector("#form").addEventListener("submit", (event) => {
-    event.preventDefault();
-    document.querySelector("#errorMsg").textContent = "";
-    validateForm();
-});
