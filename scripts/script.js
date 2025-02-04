@@ -92,7 +92,16 @@ function getPokemons() {
 
 
 
-function toggleMusic() {}
+function toggleMusic() {
+    console.log("toggleMusic()")
+    const bgMusicRef = document.querySelector("#bgMusic")
+            bgMusicRef.volume = 0.04;
+    if (bgMusicRef.paused) {
+        bgMusicRef.play();
+    } else {
+         bgMusicRef.pause()
+    }
+}
 
 function highScore() {}
 
