@@ -38,7 +38,7 @@ function gameLoad() {
 }
 
 function gameStart() {
-    startTimer();
+    timer();
     movePokemons();
 }
 
@@ -68,8 +68,7 @@ function getPokemons() {
                 pokemonImgRef.style.top = `${oGameData.getTopPosition()}px`;
 
                 pokemonImgRef.addEventListener("mouseenter", () => {
-                    if (
-                        pokemonImgRef.getAttribute("src") !==
+                       if (pokemonImgRef.getAttribute("src") !==
                         "./assets/ball.webp"
                     ) {
                         pokemonImgRef.setAttribute("src", "./assets/ball.webp");
@@ -91,11 +90,17 @@ function getPokemons() {
         });
 }
 
+
+
 function toggleMusic() {}
+
+function highScore() {}
 
 function addTrainerToDatabase() {}
 
-function startTimer() {}
+function timer() {}
+
+
 
 function movePokemons() {
     console.log("movePokemons()");
@@ -109,7 +114,29 @@ function movePokemons() {
     }, 3000);
 }
 
-function endGame() {}
+function endGame() {
+    console.log("endGame()")
+
+    toggleMusic();
+
+    timer();
+
+    highScore();
+    
+    oGameData.endTimeInMilliseconds();
+    let allPokemons = document.querySelectorAll(".pokemon");
+        allPokemons.forEach((pokemon) => {
+            pokemon.classList.add("d-none")
+        });
+
+    //Stänga av musik
+    //Avsluta timer
+    //Hämta total highscore
+    //Kolla om score är top 10 på highscore
+    //OM : Lägga till highscore och ta bort tidigare highscore.
+    //Lägga in en overlay bakom highscore?
+
+}
 
 function checkForWin() {
     console.log("checkForWin()");
