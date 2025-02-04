@@ -7,7 +7,7 @@ function pageLoad() {
         event.preventDefault();
        if (validateForm()) {
         resetForm();
-        gameStart();
+        gameLoad();
         }
     });
 }
@@ -23,19 +23,35 @@ function resetForm() {
 
 }
 
-function gameStart() {
-    console.log("gameStart()")
+function gameLoad() {
+    console.log("gameLoad()")
+
     document.querySelector("#formWrapper").classList.add("d-none")
     document.querySelector("#gameField").classList.remove("d-none")
     document.querySelector("body").style.backgroundImage = "url('../assets/arena-background.png')";
-    //loadPokemons
-    //randomizePokemons
-    //placePokemons
-    //addTrainerToDatabase
-    //toggleMusic
 
-    //startGame -- (is this gameLoad?) showPokemons , startTimer & movePokemons
+    getPokemons();
+    toggleMusic();
+    addTrainerToDatabase();
+
+    gameStart();
 }
+
+function gameStart() {
+    startTimer();
+    movePokemons();
+}
+
+function getPokemons() {}
+
+function toggleMusic() {}
+
+function addTrainerToDatabase() {}
+
+function startTimer() {}
+
+function movePokemons() {}
+
 
 function validateForm() {
     console.log("validateForm()");
