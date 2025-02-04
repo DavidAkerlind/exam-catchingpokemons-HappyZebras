@@ -52,9 +52,25 @@
         </section>
         <section id="gameField" class="game-field d-none">
             <section class="high-score d-none" id="highScore">
-                <h1 class="game-field__heading">Congratulations!</h1>
-                <h3 class="gamefield__sub-heading" id="winMsg"></h3>
-                <ol class="highscore-list" id="highscoreList"></ol>
+                <h1 class="high-score__heading">Congratulations!</h1>
+                <h3 class="high-score__sub-heading" id="winMsg"></h3>
+                
+                <div class="high-score__list-heading-section">
+                    <h4 class="high-score__list-heading">Player</h4>
+                    <h4 class="high-score__list-heading">Time</h4>
+                </div>
+                <hr class="high-score-list__line">
+
+                <ol class="highscore-list" id="highscoreList">
+                    
+                    <!-- Example list -->
+                    <!-- <li>
+                        <div class="highscore-list__item"> <p id="#highScorePlayer">Player</p> <p id="#highScoreTime">00:12</p>
+                        </div>
+                    </li> -->
+                    <!--End of example list -->
+
+                </ol>
                 <button class="game-field__btn" id="playAgainBtn">
                     Play again?
                 </button>
