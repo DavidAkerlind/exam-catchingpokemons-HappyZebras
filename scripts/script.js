@@ -27,8 +27,6 @@ function gameLoad() {
 
     document.querySelector("#formWrapper").classList.add("d-none");
     document.querySelector("#gameField").classList.remove("d-none");
-    document.querySelector("body").style.backgroundImage =
-        "url('../assets/arena-background.png')";
 
     getPokemons();
     toggleMusic();
@@ -49,7 +47,6 @@ function getPokemons() {
         .then((response) => response.json())
         .then((data) => {
             const images = data.files;
-            console.log(images);
 
             for (let i = 0; i < 10; i++) {
                 const randomImage =
