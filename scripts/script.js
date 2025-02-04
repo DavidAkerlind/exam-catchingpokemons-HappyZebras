@@ -5,9 +5,9 @@ function pageLoad() {
 
     document.querySelector("#form").addEventListener("submit", (event) => {
         event.preventDefault();
-       if (validateForm()) {
-        resetForm();
-        gameLoad();
+        if (validateForm()) {
+            resetForm();
+            gameLoad();
         }
     });
 }
@@ -20,15 +20,15 @@ function resetForm() {
     document.querySelector("#age").value = "";
     document.querySelector("#boy").checked = false;
     document.querySelector("#girl").checked = false;
-
 }
 
 function gameLoad() {
-    console.log("gameLoad()")
+    console.log("gameLoad()");
 
-    document.querySelector("#formWrapper").classList.add("d-none")
-    document.querySelector("#gameField").classList.remove("d-none")
-    document.querySelector("body").style.backgroundImage = "url('../assets/arena-background.png')";
+    document.querySelector("#formWrapper").classList.add("d-none");
+    document.querySelector("#gameField").classList.remove("d-none");
+    document.querySelector("body").style.backgroundImage =
+        "url('../assets/arena-background.png')";
 
     getPokemons();
     toggleMusic();
@@ -42,7 +42,51 @@ function gameStart() {
     movePokemons();
 }
 
-function getPokemons() {}
+function getPokemons() {
+    console.log("getPokemons()");
+
+    fetch("./scripts/files.json")
+        .then((response) => response.json())
+        .then((data) => {
+            const images = data.files;
+            console.log(images);
+
+            for (let i = 0; i < 10; i++) {
+                const randomImage =
+                    images[Math.floor(Math.random() * images.length)];
+
+                oGameData.pokemonNumbers.push(randomImage);
+
+                let pokemonImgRef = document.createElement("img");
+                pokemonImgRef.setAttribute(
+                    "src",
+                    `./assets/pokemons/${randomImage}`
+                );
+                pokemonImgRef.setAttribute("id", "pokemon");
+
+                pokemonImgRef.style.position = "absolute";
+                pokemonImgRef.style.left = `${oGameData.getLeftPosition()}px`;
+                pokemonImgRef.style.top = `${oGameData.getTopPosition()}px`;
+
+                pokemonImgRef.addEventListener("mouseenter", () => {
+                    if (
+                        pokemonImgRef.getAttribute("src") !==
+                        "./assets/ball.webp"
+                    ) {
+                        pokemonImgRef.setAttribute("src", "./assets/ball.webp");
+                    } else {
+                        pokemonImgRef.setAttribute(
+                            "src",
+                            `./assets/pokemons/${randomImage}`
+                        );
+                    }
+
+                    checkForWin();
+                });
+                document.querySelector("#gameField").appendChild(pokemonImgRef);
+            }
+        });
+}
 
 function toggleMusic() {}
 
@@ -52,6 +96,7 @@ function startTimer() {}
 
 function movePokemons() {}
 
+function checkForWin() {}
 
 function validateForm() {
     console.log("validateForm()");
