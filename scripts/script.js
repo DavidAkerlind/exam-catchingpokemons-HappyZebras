@@ -33,6 +33,7 @@ function gameLoad() {
     addTrainerToDatabase();
 
     gameStart();
+    checkForWin();
 }
 
 function gameStart() {
@@ -71,14 +72,18 @@ function getPokemons() {
                         "./assets/ball.webp"
                     ) {
                         pokemonImgRef.setAttribute("src", "./assets/ball.webp");
+                        oGameData.nmbrOfCaughtPokemons++;
                     } else {
                         pokemonImgRef.setAttribute(
                             "src",
                             `./assets/pokemons/${randomImage}`
                         );
+                        oGameData.nmbrOfCaughtPokemons--;
+                    }
+                    if (checkForWin()) {
+                        endGame()
                     }
 
-                    checkForWin();
                 });
                 document.querySelector("#gameField").appendChild(pokemonImgRef);
             }
@@ -93,7 +98,18 @@ function startTimer() {}
 
 function movePokemons() {}
 
-function checkForWin() {}
+function endGame() {}
+
+function checkForWin() {
+    console.log("checkForWin()")
+    console.log(oGameData.nmbrOfCaughtPokemons);
+    
+  
+    if(oGameData.nmbrOfCaughtPokemons === 10) {
+        console.log("Vinst!")
+        return true;
+    }
+}
 
 function validateForm() {
     console.log("validateForm()");
