@@ -9,27 +9,32 @@
         <title>Gotta catch 'em all</title>
     </head>
     <body>
-        <!-- Detta är koden från mitt exempel, skriv gärna egen HTML om så önskas -->
+        
+        <!-- Validation Form -->
         <section class="form-wrapper" id="formWrapper">
             <form class="form" id="form">
-                <h1 class="form__heading">Welcome young pokemon trainer</h1>
+                <h1 class="form__heading">
+                    Welcome young pokemon trainer
+                </h1>
                 <h3 class="form__sub-heading">
                     Please enter your name and age:
                 </h3>
-                <!-- Error Message -->
+                <!-- Error Message Placement-->
                 <p class="form__error-msg" id="errorMsg"></p>
                 <input
                     class="form__input-field"
                     id="nick"
                     type="text"
-                    placeholder="Trainer nickname" />
+                    placeholder="Nickname"/>
                 <input
                     class="form__input-field"
                     id="age"
                     type="text"
                     placeholder="Age" />
-                <p class="form__text">Are you a boy? Or are you a girl?</p>
-                <label>
+                <p class="form__text">
+                    Are you a boy? Or are you a girl?
+                </p>
+                <label class="form__label">
                     <input
                         class="form__radio-btn"
                         type="radio"
@@ -37,7 +42,7 @@
                         id="boy" />
                     Boy
                 </label>
-                <label>
+                <label class="form__label">
                     <input
                         class="form__radio-btn"
                         type="radio"
@@ -50,34 +55,29 @@
                 </button>
             </form>
         </section>
+        
+        <!-- Game Field Section -->
         <section id="gameField" class="game-field d-none">
+            <!-- High Score Section-->
             <section class="high-score d-none" id="highScore">
                 <h1 class="high-score__heading">Congratulations!</h1>
+                <!-- Win Message Placement-->
                 <h3 class="high-score__sub-heading" id="winMsg"></h3>
-                
                 <div class="high-score__list-heading-section">
                     <h4 class="high-score__list-heading">Player</h4>
                     <h4 class="high-score__list-heading">Time</h4>
                 </div>
-                <hr class="high-score-list__line">
-
-                <ol class="highscore-list" id="highscoreList">
-                    
-                    <!-- Example list -->
-                    <!-- <li>
-                        <div class="highscore-list__item"> <p id="#highScorePlayer">Player</p> <p id="#highScoreTime">00:12</p>
-                        </div>
-                    </li> -->
-                    <!--End of example list -->
-
+                <hr class="high-score__line">
+                <ol class="high-score__list" id="highscoreList">
+                <!-- High Score List create from Js-->
                 </ol>
-                <button class="game-field__btn" id="playAgainBtn">
+                <button class="high-score__btn" id="playAgainBtn">
                     Play again?
                 </button>
             </section>
         </section>
 
-        <!-- Läs in audioelementet från DOMen. För att spela .play(), för att pausa .pause(), för att starta om .load()  -->
+         <!-- Audiofile On Loop -->
         <audio src="./assets/pokemon_vs_trainer.mp3" id="bgMusic" loop></audio>
     </body>
 </html>
