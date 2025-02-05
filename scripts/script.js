@@ -35,6 +35,8 @@ function gameLoad() {
 }
 
 function gameStart() {
+    console.log("gameStart()");
+    
     oGameData.startTimeInMilliseconds();
     movePokemons();
 }
@@ -100,21 +102,23 @@ function toggleMusic() {
 }
 
 function highScore() {
+    console.log("highScore()");
+    
     let gameTime = oGameData.nmbrOfMilliseconds() / 1000;
 
-    console.log(gameTime);
+   
 
     let defaultHighScores = [
-        { name: "Ash", time: 4.351 },
-        { name: "Misty", time: 13.214 },
-        { name: "Brock", time: 6.532 },
-        { name: "Pikachu", time: 11.789 },
-        { name: "Charizard", time: 15.876 },
-        { name: "Squirtle", time: 21.543 },
-        { name: "Bulbasaur", time: 12.912 },
-        { name: "Eevee", time: 9.123 },
-        { name: "Meowth", time: 13.876 },
-        { name: "Psyduck", time: 28.025 },
+        { trainerName: "Ash", time: 4.351 },
+        { trainerName: "Misty", time: 13.214 },
+        { trainerName: "Brock", time: 6.532 },
+        { trainerName: "Pikachu", time: 11.789 },
+        { trainerName: "Charizard", time: 15.876 },
+        { trainerName: "Squirtle", time: 21.543 },
+        { trainerName: "Bulbasaur", time: 12.912 },
+        { trainerName: "Eevee", time: 9.123 },
+        { trainerName: "Meowth", time: 13.876 },
+        { trainerName: "Psyduck", time: 28.025 },
     ];
     defaultHighScores = JSON.stringify(defaultHighScores);
 
@@ -122,14 +126,12 @@ function highScore() {
         localStorage.getItem("highScoreList") || defaultHighScores
     );
 
-    let trainerInfo = { nickname: oGameData.trainerName, time: gameTime };
+    let trainerInfo = { trainerName: oGameData.trainerName, time: gameTime };
 
     highScoreList.push(trainerInfo);
-    console.log(highScoreList);
 
     highScoreList.sort((a, b) => a.time - b.time);
 
-    console.log(highScoreList);
 
     if (highScoreList.length > 10) {
         highScoreList.pop();
@@ -148,7 +150,8 @@ function highScore() {
     document.querySelector(
         "#winMsg"
     ).textContent = `Well played ${genderTitle} ${oGameData.trainerName}, your time is: ${gameTime}`;
-    //print score       Skicka ut score i winMsg
+
+    return highScoreList;
 }
 
 function movePokemons() {
@@ -170,18 +173,38 @@ function endGame() {
 
     oGameData.endTimeInMilliseconds();
 
-    highScore();
+    highScorePrintOut(highScore());
 
     let allPokemons = document.querySelectorAll(".pokemon");
     allPokemons.forEach((pokemon) => {
         pokemon.classList.add("d-none");
     });
 
-    //Hämta total highscore
-    //Kolla om score är top 10 på highscore
-    //OM : Lägga till highscore och ta bort tidigare highscore.
-    //Lägga in en overlay bakom highscore?
 }
+
+function highScorePrintOut (highScoreList){
+    console.log("highScorePrintOut()");
+    
+    for (let i = 0; i < highScoreList.length; i++) {
+        let liRef = document.createElement('li');
+        let divRef = document.createElement('div');
+        let playerRef = document.createElement('p');
+        let timeRef = document.createElement('p');
+        divRef.classList.add('highscore-list__item');
+        playerRef.setAttribute('id', 'highScorePlayer');
+        timeRef.setAttribute('id', 'highScoreTime');
+        
+        playerRef.textContent =  highScoreList[i].trainerName
+
+        timeRef.textContent =  highScoreList[i].time
+        
+        document.querySelector('#highscoreList').appendChild(liRef);
+        liRef.appendChild(divRef);
+        divRef.appendChild(playerRef);
+        divRef.appendChild(timeRef);
+    }
+}
+
 
 function checkForWin() {
     console.log("checkForWin()");
