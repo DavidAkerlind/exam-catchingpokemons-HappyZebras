@@ -10,6 +10,10 @@ function pageLoad() {
             gameLoad();
         }
     });
+
+    document
+        .querySelector("#playAgainBtn")
+        .addEventListener("click", pageReload);
 }
 
 function resetForm() {
@@ -36,7 +40,7 @@ function gameLoad() {
 
 function gameStart() {
     console.log("gameStart()");
-    
+
     oGameData.startTimeInMilliseconds();
     movePokemons();
 }
@@ -103,10 +107,8 @@ function toggleMusic() {
 
 function highScore() {
     console.log("highScore()");
-    
-    let gameTime = oGameData.nmbrOfMilliseconds() / 1000;
 
-   
+    let gameTime = oGameData.nmbrOfMilliseconds() / 1000;
 
     let defaultHighScores = [
         { trainerName: "Ash", time: 4.351 },
@@ -132,7 +134,6 @@ function highScore() {
 
     highScoreList.sort((a, b) => a.time - b.time);
 
-
     if (highScoreList.length > 10) {
         highScoreList.pop();
     }
@@ -157,7 +158,9 @@ function highScore() {
 function movePokemons() {
     console.log("movePokemons()");
 
-    setInterval(() => {
+    clearInterval(oGameData.timeId);
+
+    oGameData.timeId = setInterval(() => {
         let allPokemons = document.querySelectorAll(".pokemon");
         allPokemons.forEach((pokemon) => {
             pokemon.style.top = `${oGameData.getTopPosition()}px`;
@@ -179,32 +182,41 @@ function endGame() {
     allPokemons.forEach((pokemon) => {
         pokemon.classList.add("d-none");
     });
-
 }
 
-function highScorePrintOut (highScoreList){
-    console.log("highScorePrintOut()");
-    
-    for (let i = 0; i < highScoreList.length; i++) {
-        let liRef = document.createElement('li');
-        let divRef = document.createElement('div');
-        let playerRef = document.createElement('p');
-        let timeRef = document.createElement('p');
-        divRef.classList.add('highscore-list__item');
-        playerRef.setAttribute('id', 'highScorePlayer');
-        timeRef.setAttribute('id', 'highScoreTime');
-        
-        playerRef.textContent =  highScoreList[i].trainerName
+function pageReload() {
+    console.log("pageReload()");
 
-        timeRef.textContent =  highScoreList[i].time
-        
-        document.querySelector('#highscoreList').appendChild(liRef);
+    oGameData.init();
+    document.querySelector("#highScore").classList.add("d-none");
+    document.querySelector("#gameField").classList.add("d-none");
+    document.querySelector("#formWrapper").classList.remove("d-none");
+}
+
+function highScorePrintOut(highScoreList) {
+    console.log("highScorePrintOut()");
+
+    document.querySelector("#highscoreList").textContent = "";
+
+    for (let i = 0; i < highScoreList.length; i++) {
+        let liRef = document.createElement("li");
+        let divRef = document.createElement("div");
+        let playerRef = document.createElement("p");
+        let timeRef = document.createElement("p");
+        divRef.classList.add("highscore-list__item");
+        playerRef.setAttribute("id", "highScorePlayer");
+        timeRef.setAttribute("id", "highScoreTime");
+
+        playerRef.textContent = highScoreList[i].trainerName;
+
+        timeRef.textContent = highScoreList[i].time;
+
+        document.querySelector("#highscoreList").appendChild(liRef);
         liRef.appendChild(divRef);
         divRef.appendChild(playerRef);
         divRef.appendChild(timeRef);
     }
 }
-
 
 function checkForWin() {
     console.log("checkForWin()");
