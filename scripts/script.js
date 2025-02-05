@@ -38,7 +38,8 @@ function gameLoad() {
 }
 
 function gameStart() {
-    timer();
+    oGameData.startTimeInMilliseconds();
+    // timer();
     movePokemons();
 }
 
@@ -68,7 +69,8 @@ function getPokemons() {
                 pokemonImgRef.style.top = `${oGameData.getTopPosition()}px`;
 
                 pokemonImgRef.addEventListener("mouseenter", () => {
-                       if (pokemonImgRef.getAttribute("src") !==
+                    if (
+                        pokemonImgRef.getAttribute("src") !==
                         "./assets/ball.webp"
                     ) {
                         pokemonImgRef.setAttribute("src", "./assets/ball.webp");
@@ -90,26 +92,20 @@ function getPokemons() {
         });
 }
 
-
-
 function toggleMusic() {
-    console.log("toggleMusic()")
-    const bgMusicRef = document.querySelector("#bgMusic")
-            bgMusicRef.volume = 0.04;
+    console.log("toggleMusic()");
+    const bgMusicRef = document.querySelector("#bgMusic");
+    bgMusicRef.volume = 0.04;
     if (bgMusicRef.paused) {
         bgMusicRef.play();
     } else {
-         bgMusicRef.pause()
+        bgMusicRef.pause();
     }
 }
 
 function highScore() {}
 
 function addTrainerToDatabase() {}
-
-function timer() {}
-
-
 
 function movePokemons() {
     console.log("movePokemons()");
@@ -124,27 +120,24 @@ function movePokemons() {
 }
 
 function endGame() {
-    console.log("endGame()")
+    console.log("endGame()");
 
     toggleMusic();
 
-    timer();
+    oGameData.endTimeInMilliseconds();
+    console.log(oGameData.nmbrOfMilliseconds()); //FOR NOW
 
     highScore();
-    
-    oGameData.endTimeInMilliseconds();
-    let allPokemons = document.querySelectorAll(".pokemon");
-        allPokemons.forEach((pokemon) => {
-            pokemon.classList.add("d-none")
-        });
 
-    //Stänga av musik
-    //Avsluta timer
+    let allPokemons = document.querySelectorAll(".pokemon");
+    allPokemons.forEach((pokemon) => {
+        pokemon.classList.add("d-none");
+    });
+
     //Hämta total highscore
     //Kolla om score är top 10 på highscore
     //OM : Lägga till highscore och ta bort tidigare highscore.
     //Lägga in en overlay bakom highscore?
-
 }
 
 function checkForWin() {
