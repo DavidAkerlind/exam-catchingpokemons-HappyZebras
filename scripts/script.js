@@ -1,7 +1,7 @@
 pageLoad();
 
+//Load event listener for #form and #playAgainBtn
 function pageLoad() {
-    console.log("pageLoad()");
 
     document.querySelector("#form").addEventListener("submit", (event) => {
         event.preventDefault();
@@ -11,13 +11,11 @@ function pageLoad() {
         }
     });
 
-    document
-        .querySelector("#playAgainBtn")
-        .addEventListener("click", pageReload);
+    document.querySelector("#playAgainBtn").addEventListener("click", pageReload);
 }
 
+// Clears and resets the inputfields and th errormessage in the form
 function resetForm() {
-    console.log("resetForm()");
 
     document.querySelector("#errorMsg").textContent = "";
     document.querySelector("#nick").value = "";
@@ -26,8 +24,8 @@ function resetForm() {
     document.querySelector("#girl").checked = false;
 }
 
+// Hides the form and loads in pokemons, music, gamefield and starts game
 function gameLoad() {
-    console.log("gameLoad()");
 
     document.querySelector("#formWrapper").classList.add("d-none");
     document.querySelector("#gameField").classList.remove("d-none");
@@ -35,18 +33,17 @@ function gameLoad() {
     getPokemons();
     toggleMusic();
     gameStart();
-    checkForWin();
 }
 
+// Starts the timer and begins the movement of pokemons
 function gameStart() {
-    console.log("gameStart()");
 
     oGameData.startTimeInMilliseconds();
     movePokemons();
 }
 
+//Create function to get Pokemons images from Json-file and use for-loop to random them to game field
 function getPokemons() {
-    console.log("getPokemons()");
 
     fetch("./scripts/files.json")
         .then((response) => response.json())
@@ -94,8 +91,9 @@ function getPokemons() {
         });
 }
 
+// If music from the audio-element is playing than pause else start the music
 function toggleMusic() {
-    console.log("toggleMusic()");
+
     const bgMusicRef = document.querySelector("#bgMusic");
     bgMusicRef.volume = 0.04;
     if (bgMusicRef.paused) {
@@ -105,22 +103,29 @@ function toggleMusic() {
     }
 }
 
+// Gets the time from game, if the highscore-list from localstorage is empty than render deafult list 
+// Add trainer name + time to list, sort list, take out the last name on the list if > 10
+// Shows the highscore list and sends it to localstorage. Displays personalisied win-message
+// Returns highscorelist for printing in next function
 function highScore() {
-    console.log("highScore()");
 
-    let gameTime = oGameData.nmbrOfMilliseconds() / 1000;
+    let gameTime = oGameData.nmbrOfMilliseconds() / 10;
+
+    gameTime = Math.round(gameTime)
+
+    gameTime = gameTime / 100
 
     let defaultHighScores = [
-        { trainerName: "Ash", time: 4.351 },
-        { trainerName: "Misty", time: 13.214 },
-        { trainerName: "Brock", time: 6.532 },
-        { trainerName: "Pikachu", time: 11.789 },
-        { trainerName: "Charizard", time: 15.876 },
-        { trainerName: "Squirtle", time: 21.543 },
-        { trainerName: "Bulbasaur", time: 12.912 },
-        { trainerName: "Eevee", time: 9.123 },
-        { trainerName: "Meowth", time: 13.876 },
-        { trainerName: "Psyduck", time: 28.025 },
+        { trainerName: "Ash", time: 4.35 },
+        { trainerName: "Misty", time: 13.21 },
+        { trainerName: "Brock", time: 6.53 },
+        { trainerName: "Pikachu", time: 11.78 },
+        { trainerName: "Charizard", time: 15.87 },
+        { trainerName: "Squirtle", time: 21.54 },
+        { trainerName: "Bulbasaur", time: 12.91 },
+        { trainerName: "Eevee", time: 9.12 },
+        { trainerName: "Meowth", time: 13.87 },
+        { trainerName: "Psyduck", time: 28.02 },
     ];
     defaultHighScores = JSON.stringify(defaultHighScores);
 
@@ -150,13 +155,13 @@ function highScore() {
     }
     document.querySelector(
         "#winMsg"
-    ).textContent = `Well played ${genderTitle} ${oGameData.trainerName}, your time is: ${gameTime}`;
+    ).textContent = `Well played ${genderTitle} ${oGameData.trainerName}, your time is: ${gameTime}s`;
 
     return highScoreList;
 }
 
+//Change the position of each pokemon at random, with an interval. Clears previous interval first.
 function movePokemons() {
-    console.log("movePokemons()");
 
     clearInterval(oGameData.timeId);
 
@@ -169,8 +174,8 @@ function movePokemons() {
     }, 3000);
 }
 
+//Turn music off, hides all pokemons, stop the timer and show the highscore list.
 function endGame() {
-    console.log("endGame()");
 
     toggleMusic();
 
@@ -183,9 +188,8 @@ function endGame() {
         pokemon.classList.add("d-none");
     });
 }
-
+//Clears the page and reloads the validation form.
 function pageReload() {
-    console.log("pageReload()");
 
     oGameData.init();
     document.querySelector("#highScore").classList.add("d-none");
@@ -193,8 +197,10 @@ function pageReload() {
     document.querySelector("#formWrapper").classList.remove("d-none");
 }
 
+// Resets the list in html and then loop through each highscore item from the parameter
+// Create li element with the players name and time as two p-elements
+// Append the full li-element to the ol-list
 function highScorePrintOut(highScoreList) {
-    console.log("highScorePrintOut()");
 
     document.querySelector("#highscoreList").textContent = "";
 
@@ -203,13 +209,13 @@ function highScorePrintOut(highScoreList) {
         let divRef = document.createElement("div");
         let playerRef = document.createElement("p");
         let timeRef = document.createElement("p");
-        divRef.classList.add("highscore-list__item");
+        divRef.classList.add("high-score__list-item");
         playerRef.setAttribute("id", "highScorePlayer");
         timeRef.setAttribute("id", "highScoreTime");
 
         playerRef.textContent = highScoreList[i].trainerName;
 
-        timeRef.textContent = highScoreList[i].time;
+        timeRef.textContent = `${highScoreList[i].time} s`;
 
         document.querySelector("#highscoreList").appendChild(liRef);
         liRef.appendChild(divRef);
@@ -217,17 +223,19 @@ function highScorePrintOut(highScoreList) {
         divRef.appendChild(timeRef);
     }
 }
-
+// We log the amount of caught pokemons in the globalvariable 
+// if this variable is 10 then we have caught all pokemons and we return true to run the endGame function
 function checkForWin() {
-    console.log("checkForWin()");
+
     if (oGameData.nmbrOfCaughtPokemons === 10) {
         console.log("Vinst!");
         return true;
     }
 }
 
+//Validates user input from form and returns error message.
 function validateForm() {
-    console.log("validateForm()");
+
     let trainerName = document.querySelector("#nick");
     let trainerAge = document.querySelector("#age");
     let isTrainerGenderBoy = document.querySelector("#boy");

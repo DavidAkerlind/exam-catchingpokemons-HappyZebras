@@ -6,14 +6,13 @@
     --text-nunito-sans: Nunito Sans, sans-serif; /* Nunito Sans */
 }
 
+/* ==== Reset & Normalize ==== */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* Ser till så att bilderna får korrekt storlek och deras rörelse animeras */
-/* När ni sätter intervallen efter vilken pokemonen får sin nya position bör den intervallen överensstämma med tiden här. 3s. */
 img {
     width: 300px;
     transition: all 3s linear;
@@ -34,9 +33,22 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+/* === Basic Styling === */
+
+.d-none {
+    display: none;
+}
+
+/* === Validation Form === */
+.form__label {
+    cursor: pointer;
+    margin: 0.8rem;
+    display: inline-block;
+}
+
 .form-wrapper {
     max-width: 400px;
-    width: 100%;
 
     font-family: var(--text-nunito-sans);
     text-align: center;
@@ -72,12 +84,6 @@ body {
     margin-top: 1.5rem;
 }
 
-label {
-    cursor: pointer;
-    margin: 0.8rem;
-    display: inline-block;
-}
-
 .form__input-field {
     padding: 0.5rem;
     padding-left: 0.8rem;
@@ -88,8 +94,14 @@ label {
     font-size: 1rem;
 }
 
+.form__error-msg {
+    color: red;
+    font-style: italic;
+}
+
+/* === Buttons === */
 .form__btn,
-.game-field__btn {
+.high-score__btn {
     background: #54a429;
     color: white;
     border: none;
@@ -102,15 +114,11 @@ label {
     margin-top: 15px;
 }
 .form__btn:hover,
-.game-field__btn:hover {
+.high-score__btn:hover {
     background-color: #457c28;
 }
 
-.form__error-msg {
-    color: red;
-    font-style: italic;
-}
-
+/* === Game Field === */
 .game-field {
     color: #ddd;
     height: 100vh;
@@ -124,22 +132,16 @@ label {
     overflow: hidden;
 }
 
+/* === Highscore === */
 .high-score {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 
-    z-index: 10;
+    max-width: 600px;
 
-    max-width: 400px;
-    width: 100%;
+    z-index: 10;
 
     font-family: var(--text-nunito-sans);
     text-align: center;
@@ -162,14 +164,14 @@ label {
 .high-score__heading {
     font-size: 2.2rem;
     font-weight: 800;
-}
 
-.high-score__highscore-heading {
-    font-size: 1.5rem;
+    margin-bottom: 1rem ;
 }
 
 .high-score__sub-heading {
     font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
 }
 
 .high-score__list-heading-section {
@@ -179,20 +181,14 @@ label {
     justify-content: space-between;
 }
 
-.highscore-list {
+.high-score__list {
     width: 100%;
 }
 
-.highscore-list__item {
+.high-score__list-item {
     display: flex;
     justify-content: space-between;
     margin-top: 0.2rem;
-}
-
-.high-score-list__line {
-    margin: 1rem;
-    margin-top: 0.5rem;
-    width: 100%;
 }
 
 .high-score__list-heading {
@@ -200,10 +196,10 @@ label {
     font-weight: 800;
 }
 
-li {
+.high-score__line {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
     width: 100%;
 }
 
-.d-none {
-    display: none;
-}
+
