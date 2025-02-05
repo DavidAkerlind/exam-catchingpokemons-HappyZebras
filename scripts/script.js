@@ -29,17 +29,13 @@ function gameLoad() {
     document.querySelector("#gameField").classList.remove("d-none");
 
     getPokemons();
-
     toggleMusic();
-    addTrainerToDatabase();
-
     gameStart();
     checkForWin();
 }
 
 function gameStart() {
     oGameData.startTimeInMilliseconds();
-    // timer();
     movePokemons();
 }
 
@@ -103,9 +99,57 @@ function toggleMusic() {
     }
 }
 
-function highScore() {}
+function highScore() {
+    let gameTime = oGameData.nmbrOfMilliseconds() / 1000;
 
-function addTrainerToDatabase() {}
+    console.log(gameTime);
+
+    let defaultHighScores = [
+        { name: "Ash", time: 4.351 },
+        { name: "Misty", time: 13.214 },
+        { name: "Brock", time: 6.532 },
+        { name: "Pikachu", time: 11.789 },
+        { name: "Charizard", time: 15.876 },
+        { name: "Squirtle", time: 21.543 },
+        { name: "Bulbasaur", time: 12.912 },
+        { name: "Eevee", time: 9.123 },
+        { name: "Meowth", time: 13.876 },
+        { name: "Psyduck", time: 28.025 },
+    ];
+    defaultHighScores = JSON.stringify(defaultHighScores);
+
+    let highScoreList = JSON.parse(
+        localStorage.getItem("highScoreList") || defaultHighScores
+    );
+
+    let trainerInfo = { nickname: oGameData.trainerName, time: gameTime };
+
+    highScoreList.push(trainerInfo);
+    console.log(highScoreList);
+
+    highScoreList.sort((a, b) => a.time - b.time);
+
+    console.log(highScoreList);
+
+    if (highScoreList.length > 10) {
+        highScoreList.pop();
+    }
+
+    localStorage.setItem("highScoreList", JSON.stringify(highScoreList));
+
+    document.querySelector("#highScore").classList.remove("d-none");
+
+    let genderTitle = "";
+    if (oGameData.trainerGender === "Boy") {
+        genderTitle = "Mr.";
+    } else {
+        genderTitle = "Ms.";
+    }
+    document.querySelector(
+        "#winMsg"
+    ).textContent = `Well played ${genderTitle} ${oGameData.trainerName}, your time is: ${gameTime}`;
+    //print score       Skicka ut score i winMsg
+}
 
 function movePokemons() {
     console.log("movePokemons()");
@@ -125,7 +169,6 @@ function endGame() {
     toggleMusic();
 
     oGameData.endTimeInMilliseconds();
-    console.log(oGameData.nmbrOfMilliseconds()); //FOR NOW
 
     highScore();
 
