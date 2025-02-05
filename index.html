@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./styles/style.css" />
+        <script src="./scripts/oGameData.js"></script>
+        <script type="module" src="./scripts/script.js"></script>
+        <title>Gotta catch 'em all</title>
+    </head>
+    <body>
+        
+        <!-- Validation Form -->
+        <section class="form-wrapper" id="formWrapper">
+            <form class="form" id="form">
+                <h1 class="form__heading">
+                    Welcome young pokemon trainer
+                </h1>
+                <h3 class="form__sub-heading">
+                    Please enter your name and age:
+                </h3>
+                <!-- Error Message Placement-->
+                <p class="form__error-msg" id="errorMsg"></p>
+                <input
+                    class="form__input-field"
+                    id="nick"
+                    type="text"
+                    placeholder="Nickname"/>
+                <input
+                    class="form__input-field"
+                    id="age"
+                    type="text"
+                    placeholder="Age" />
+                <p class="form__text">
+                    Are you a boy? Or are you a girl?
+                </p>
+                <label class="form__label">
+                    <input
+                        class="form__radio-btn"
+                        type="radio"
+                        name="gender"
+                        id="boy" />
+                    Boy
+                </label>
+                <label class="form__label">
+                    <input
+                        class="form__radio-btn"
+                        type="radio"
+                        name="gender"
+                        id="girl" />
+                    Girl
+                </label>
+                <button class="form__btn" id="submitBtn">
+                    Let's catch some pokemons!
+                </button>
+            </form>
+        </section>
+        
+        <!-- Game Field Section -->
+        <section id="gameField" class="game-field d-none">
+            <!-- High Score Section-->
+            <section class="high-score d-none" id="highScore">
+                <h1 class="high-score__heading">Congratulations!</h1>
+                <!-- Win Message Placement-->
+                <h3 class="high-score__sub-heading" id="winMsg"></h3>
+                <div class="high-score__list-heading-section">
+                    <h4 class="high-score__list-heading">Player</h4>
+                    <h4 class="high-score__list-heading">Time</h4>
+                </div>
+                <hr class="high-score__line">
+                <ol class="high-score__list" id="highscoreList">
+                <!-- High Score List create from Js-->
+                </ol>
+                <button class="high-score__btn" id="playAgainBtn">
+                    Play again?
+                </button>
+            </section>
+        </section>
+
+         <!-- Audiofile On Loop -->
+        <audio src="./assets/pokemon_vs_trainer.mp3" id="bgMusic" loop></audio>
+    </body>
+</html>
